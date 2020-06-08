@@ -24,6 +24,8 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class NewsListActivity extends DaggerAppCompatActivity implements NewsListAdapter.OnItemClickListener {
+    private static final String COUNTRY_CODE = "in";
+    private static final String API_KEY = "YOUR_NEWS_API_KEY"; // You can create your own API KEY from newsapi.org
     @Inject
     ViewModelFactory viewModelFactory;
     NewsListViewModel newsListViewModel;
@@ -39,7 +41,7 @@ public class NewsListActivity extends DaggerAppCompatActivity implements NewsLis
         binding.setViewmodel(newsListViewModel);
 
         ObserverViewModel();
-        newsListViewModel.getNews();
+        newsListViewModel.getNews(COUNTRY_CODE, API_KEY);
     }
 
     private void ObserverViewModel() {

@@ -16,8 +16,6 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class NewsListViewModel extends ViewModel {
-    private static final String COUNTRY_CODE = "in";
-    private static final String API_KEY = "53688a9ac45b41fe86bed36b80f27843";
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<NewsResponse> newsResponseLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
@@ -42,9 +40,9 @@ public class NewsListViewModel extends ViewModel {
         return loading;
     }
 
-    public void getNews() {
+    public void getNews(String countryCode, String apiKey) {
         loading.setValue(true);
-        compositeDisposable.add(repository.getTopHeadLinesNews(COUNTRY_CODE, API_KEY).subscribeOn(Schedulers.io())
+        compositeDisposable.add(repository.getTopHeadLinesNews(countryCode, apiKey).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<NewsResponse>() {
                     @Override
                     public void onSuccess(NewsResponse value) {
